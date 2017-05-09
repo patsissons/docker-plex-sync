@@ -9,6 +9,7 @@ ENV RATE_LIMIT=''
 
 ENV SECTION_MAPS=''
 ENV CRON_SCHEDULE='0 * * * *'
+ENV INITIAL_RUN=''
 
 ADD root/ /
 
@@ -18,4 +19,4 @@ RUN apt-get update && \
     chmod 0644 /usr/local/bin/plex-sync && \
     touch /var/log/cron.log
 
-CMD cron && tail -f /var/log/cron.log
+CMD [ -z "$INITIAL_RUN" ] && /usr/local/bin/plex-sync || cron && tail -f /var/log/cron.log
