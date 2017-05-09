@@ -1,5 +1,5 @@
 #!/bin/sh
 
-grep plex-sync /etc/crontab || (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /usr/local/bin/plex-sync-job") | crontab -
+crontab -l | grep plex-sync-job || (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /usr/local/bin/plex-sync-job") | crontab -
 
 [ -z "$INITIAL_RUN" ] && /usr/local/bin/plex-sync || cron && tail -f /var/log/cron.log
