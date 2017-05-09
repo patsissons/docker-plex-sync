@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo 'Running plex-sync...'
+
+IFS='|'
+for mapping in $SECTION_MAPS; do
+  mapping="[$(echo $mapping | sed -e 's/^\s*//' -e 's/\s*$//')]"
+
+  /bin/sh -c "plex-sync $mapping"
+done
+unset IFS
