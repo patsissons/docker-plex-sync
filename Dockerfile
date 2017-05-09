@@ -17,6 +17,7 @@ RUN apt-get update && \
     apt-get -y -qq --force-yes install cron && \
     npm install -g --quiet plex-sync && \
     chmod 0644 /usr/local/bin/plex-sync-job && \
+    chmod 0644 /usr/local/bin/plex-sync-entrypoint && \
     touch /var/log/cron.log
 
-CMD [ -z "$INITIAL_RUN" ] && /usr/local/bin/plex-sync || cron && tail -f /var/log/cron.log
+ENTRYPOINT /usr/local/bin/plex-sync-entrypoint
