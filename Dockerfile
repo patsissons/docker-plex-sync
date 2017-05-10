@@ -14,7 +14,7 @@ ENV INITIAL_RUN=''
 ADD root/ /
 
 RUN apt-get update && \
-    apt-get -y -qq --force-yes install cron && \
+    apt-get -y -qq --force-yes install cron rsyslog && \
     npm install -g --quiet plex-sync && \
     chmod 0755 /usr/local/bin/plex-sync-job && \
     chmod 0755 /usr/local/bin/plex-sync-entrypoint && \
