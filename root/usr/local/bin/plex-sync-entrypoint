@@ -1,6 +1,6 @@
 #!/bin/sh
 
-crontab -l | grep plex-sync-job || echo 'Installing cron job' && (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /usr/local/bin/plex-sync-job >> /var/log/cron.log 2>&1") | crontab -
+crontab -l | grep plex-sync-job || echo ('Installing cron job' && (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /usr/local/bin/plex-sync-job >> /var/log/cron.log 2>&1") | crontab -)
 
 [ ! -z "$INITIAL_RUN" ] && /usr/local/bin/plex-sync-job
 
