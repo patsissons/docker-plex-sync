@@ -1,0 +1,11 @@
+#!/bin/sh
+
+export -p > /root/project_env.sh
+
+echo 'Installing cron job' && crontab -l 2>/dev/null; echo "$CRON_SCHEDULE . /root/project_env.sh >> /var/log/cron.log 2>&1; /usr/local/bin/plex-sync-job >> /var/log/cron.log 2>&1" | crontab -
+
+[ ! -z "$INITIAL_RUN" ] && /usr/local/bin/plex-sync-job
+
+touch /var/log/cron.log
+
+rsyslogd && cron && tail -F /var/log/syslog /var/log/cron.log 2>/dev/null 
